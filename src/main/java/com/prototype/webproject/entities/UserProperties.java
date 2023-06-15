@@ -9,28 +9,30 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class User implements Serializable{
-private static final long serialVersionUID = 1L;
+public class UserProperties implements Serializable{
 
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	private String nome;
+	private String name;
 	private String email;
 	private String phone;
 	private String password;
 	
-	public User()
+	
+	public UserProperties()
 	{
 		
 	}
 	
-	public User(Long id, String nome, String email, String phone, String password)
+	public UserProperties(Long id, String name, String email, String phone, String password)
 	{
 		super();
 		this.id = id;
-		this.nome = nome;
+		this.name = name;
 		this.email = email;
 		this.phone = phone;
 		this.password = password;
@@ -44,12 +46,12 @@ private static final long serialVersionUID = 1L;
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getName() {
+		return name;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getEmail() {
@@ -89,7 +91,7 @@ private static final long serialVersionUID = 1L;
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
+		UserProperties other = (UserProperties) obj;
 		return Objects.equals(id, other.id);
 	}
 	
