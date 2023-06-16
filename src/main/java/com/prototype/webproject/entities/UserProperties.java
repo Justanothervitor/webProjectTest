@@ -1,14 +1,21 @@
 package com.prototype.webproject.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name ="Clients_Table")
 public class UserProperties implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -22,6 +29,9 @@ public class UserProperties implements Serializable{
 	private String phone;
 	private String password;
 	
+	@JsonIgnore
+	@OneToMany(mappedBy = "client")
+	private List <ClientOrder> orders = new ArrayList<>() ;
 	
 	public UserProperties()
 	{
@@ -76,6 +86,12 @@ public class UserProperties implements Serializable{
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	
+
+	public List<ClientOrder> getOrders() {
+		return orders;
 	}
 
 	@Override
