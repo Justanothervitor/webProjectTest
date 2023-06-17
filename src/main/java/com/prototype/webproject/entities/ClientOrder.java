@@ -41,12 +41,12 @@ public class ClientOrder implements Serializable {
 		
 	}
 
-	public ClientOrder(Long id, Instant moment,ClientOrderStatus orderStatus, UserProperties client) {
+	public ClientOrder(Long id, Instant moment, UserProperties client,ClientOrderStatus orderStatus) {
 		super();
 		this.id = id;
 		this.moment = moment;
-		setOrderStatus(orderStatus);
 		this.client = client;
+		setOrderStatus(orderStatus);
 	}
 
 	public Long getId() {
@@ -65,6 +65,14 @@ public class ClientOrder implements Serializable {
 		this.moment = moment;
 	}
 
+	public UserProperties getClient() {
+		return client;
+	}
+
+	public void setClient(UserProperties client) {
+		this.client = client;
+	}
+	
 	public ClientOrderStatus getOrderStatus() {
 		return ClientOrderStatus.valueOf(orderStatus);
 	}
@@ -74,14 +82,6 @@ public class ClientOrder implements Serializable {
 			this.orderStatus = orderStatus.getCode();
 		}
 		}
-
-	public UserProperties getClient() {
-		return client;
-	}
-
-	public void setClient(UserProperties client) {
-		this.client = client;
-	}
 
 	@Override
 	public int hashCode() {
