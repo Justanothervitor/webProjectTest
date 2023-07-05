@@ -10,11 +10,13 @@ import org.springframework.context.annotation.Profile;
 
 import com.prototype.webproject.entities.CategoryProperties;
 import com.prototype.webproject.entities.ClientOrder;
+import com.prototype.webproject.entities.OrderItem;
 import com.prototype.webproject.entities.ProductProperties;
 import com.prototype.webproject.entities.UserProperties;
 import com.prototype.webproject.entities.enums.ClientOrderStatus;
 import com.prototype.webproject.repositories.CategoryRepository;
 import com.prototype.webproject.repositories.ClientOrderRepository;
+import com.prototype.webproject.repositories.OrderItemRepository;
 import com.prototype.webproject.repositories.ProductRepository;
 import com.prototype.webproject.repositories.UserRepository;
 
@@ -33,6 +35,9 @@ public class testConfig implements CommandLineRunner {
 	
 	@Autowired
 	private ProductRepository productRepository;
+	
+	@Autowired
+	private OrderItemRepository orderItemRepository;
 	
 	@Override
 	public void run(String... args) throws Exception {
@@ -68,7 +73,11 @@ public class testConfig implements CommandLineRunner {
 		ClientOrder o3 = new ClientOrder(null, Instant.parse("2023-06-15T23:30:08Z"),u1, ClientOrderStatus.SHIPPED);
 		clientOrderRepository.saveAll(Arrays.asList(o1,o2,o3));
 
-		
+		OrderItem oi1 = new OrderItem (o1,pr1,2,pr1.getPrice());
+		OrderItem oi2 = new OrderItem (o1,pr3,1,pr3.getPrice());
+		OrderItem oi3 = new OrderItem (o2,pr3,2,pr3.getPrice());
+		OrderItem oi4 = new OrderItem (o3,pr5,2,pr5.getPrice());
+		orderItemRepository.saveAll(Arrays.asList(oi1,oi2,oi3,oi4));
 	}
 	
 }
