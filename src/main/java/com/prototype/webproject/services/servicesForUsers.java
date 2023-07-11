@@ -25,5 +25,10 @@ public class servicesForUsers {
 		Optional<UserProperties> obj = repository.findById(id);
 		return obj.get();
 	}
+	
+	public UserProperties insert(UserProperties obj)
+	{
+		return repository.save(obj);
+	}
 
 }
