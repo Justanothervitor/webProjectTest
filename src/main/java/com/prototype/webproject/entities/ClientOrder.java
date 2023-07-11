@@ -7,6 +7,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.prototype.webproject.entities.enums.ClientOrderStatus;
 
 import jakarta.persistence.CascadeType;
@@ -45,6 +46,7 @@ public class ClientOrder implements Serializable {
 	@OneToMany(mappedBy = "id.order")
 	private Set<OrderItem> items = new HashSet<>();
 	
+	@JsonIgnore
 	@OneToOne(mappedBy="order",cascade = CascadeType.ALL)
 	private PaymentProperties payment;
 	
@@ -106,6 +108,16 @@ public class ClientOrder implements Serializable {
 	public Set<OrderItem> getItems()
 	{
 		return items;
+	}
+	
+	public Double getTotal()
+	{
+		double sum = 0.0;
+		for(OrderItem x:items)
+		{
+			sum +=x.getSubTotal();
+		}
+		return sum;
 	}
 	
 	@Override
